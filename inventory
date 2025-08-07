@@ -1,4 +1,4 @@
 # these servers are going to be managed via ansible
 192.168.8.129
-192.168.8.130
-192.168.8.134
+192.168.8.138
+192.168.8.139
