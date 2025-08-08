@@ -1,5 +1,11 @@
 # these servers are going to be managed via ansible
-192.168.8.129
-192.168.8.138
-192.168.8.139
+
+[web_servers]
+192.168.8.129 
 192.168.8.132
+
+[db_servers] 
+192.168.8.138
+
+[file_servers] 
+192.168.8.139 
