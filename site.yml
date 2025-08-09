@@ -32,7 +32,6 @@
       state: latest
     when: ansible_distribution == "Ubuntu"
 
-
   - name: install httpd and php for Redhat servers
     tags: httpd,RedHat,apache
     dnf:
@@ -41,6 +40,30 @@
         - php
       state: latest
     when: ansible_distribution == "RedHat"
+
+  - name: start the httpd service (RedHat)
+    tags: apache,RedHat,httpd
+    service:
+      name: httpd
+      state: started
+      enabled: yes
+    when: ansible_distribution == "RedHat"
+
+  - name: change the email address for admin
+    tags: apache,RedHat,httpd
+    lineinfile: 
+      path: /etc/httpd/conf/httpd.conf
+      regexp: '^ServerAdmin'
+      line: ServerAdmin somebody@somewhere.net
+    when: ansible_distribution == "RedHat"
+    register: httpd
+  
+  - name: restart httpd (RedHat)
+    tags: apache,RedHat,httpd
+    service:
+      name: httpd
+      state: restarted
+    when: httpd.changed
 
   - name: copy the default html file for site
     tags: apache,apache2,httpd
