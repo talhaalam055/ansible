@@ -51,6 +51,23 @@
       group: root
       mode: 0644
 
+- hosts: workstation
+  become: true
+  tasks:
+
+  - name: install unzip
+    package:
+      name: unzip
+
+  - name: install terraform
+    unarchive:
+      src: https://releases.hashicorp.com/terraform/1.12.2/terraform_1.12.2_linux_amd64.zip
+      dest: /usr/local/bin
+      remote_src: yes
+      mode: 0775
+      owner: root
+      group: root
+
 - hosts: db_servers
   become: true
   tasks:
